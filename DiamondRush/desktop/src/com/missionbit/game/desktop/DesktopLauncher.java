@@ -7,6 +7,9 @@ import com.missionbit.game.DiamondRush;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = DiamondRush.WIDTH;
+		config.height = DiamondRush.HEIGHT;
+		config.title = DiamondRush.TITLE;
 		new LwjglApplication(new DiamondRush(), config);
 	}
 }
