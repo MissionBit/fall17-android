@@ -10,8 +10,8 @@ import com.missionbit.game.states.MenuState;
 
 public class HeroVillian extends ApplicationAdapter {
 
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 500;
 	public static final String TITLE = "Hero Villian";
 	private GameStateManager gsm;
 	private SpriteBatch batch;
