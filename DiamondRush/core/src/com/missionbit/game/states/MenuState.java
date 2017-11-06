@@ -1,5 +1,6 @@
 package com.missionbit.game.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.missionbit.game.DiamondRush;
@@ -16,30 +17,36 @@ public class MenuState extends State{
     public MenuState(GameStateManager gsm) {
         super(gsm);
 
-        //I MADE THIS
-//        background = new Texture("bg.png");
-//        playBtn = new Texture ("platBtn.png");
-//        cam.setToOrtho (false, FlappyDemo.WIDTH / 2,
-//                FlappyDemo.HEIGHT / 2);
+        background = new Texture("bg.png");
+        playBtn = new Texture ("playbtn.png");
+        cam.setToOrtho (false, DiamondRush.WIDTH / 2,
+                DiamondRush.HEIGHT / 2);
     }
 
     @Override
     protected void handleInput() {
-
+        if (Gdx.input.justTouched()){
+            gsm.set(new PlayState(gsm));
+            dispose();
+        }
     }
 
     @Override
     public void update(float dt) {
-
+        handleInput();
     }
 
     @Override
     public void render(SpriteBatch sb) {
-
+        sb.begin();
+        sb.draw(background, 0, 0, DiamondRush.WIDTH, DiamondRush.HEIGHT);
+        sb.draw(playBtn, (DiamondRush.WIDTH / 2) - (playBtn.getWidth() / 2), DiamondRush.HEIGHT / 2);
+        sb.end();
     }
 
     @Override
     public void dispose() {
-
+        background.dispose();
+        playBtn.dispose();
     }
 }
