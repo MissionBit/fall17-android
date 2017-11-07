@@ -3,12 +3,15 @@ package com.missionbit.game.states;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.missionbit.game.HeroVillian;
+import com.missionbit.game.sprites.Hero;
 
 /**
  * Created by missionbit on 10/31/17.
  */
 
 public class PlayState extends State {
+
+
     private Texture hero= new Texture("bird.png");
     public PlayState(GameStateManager gsm) {
         super(gsm);
