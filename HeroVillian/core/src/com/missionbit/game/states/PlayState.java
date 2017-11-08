@@ -1,5 +1,6 @@
 package com.missionbit.game.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.missionbit.game.HeroVillian;
@@ -11,28 +12,35 @@ import com.missionbit.game.sprites.Hero;
 
 public class PlayState extends State {
 
+    private Hero hero;
+    private Texture bg;
 
-    private Texture hero= new Texture("bird.png");
     public PlayState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, HeroVillian.WIDTH / 2, HeroVillian.HEIGHT / 2);
+        hero = new Hero(50,100);
+        bg = new Texture("MenuState.png");
     }
 
     @Override
     protected void handleInput() {
-
+        if(Gdx.input.justTouched()) {
+            hero.jump();
+        }
     }
 
     @Override
     public void update(float dt) {
-
+        handleInput();
+        hero.update(dt);
     }
 
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(hero, 50, 50);
+        sb.draw(bg,(cam.position.x - cam.viewportWidth / 2), 0);
+        sb.draw(hero.getTexture(), hero.getPosition().x, hero.getPosition().y);
         sb.end();
     }
 
