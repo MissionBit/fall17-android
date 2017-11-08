@@ -41,7 +41,7 @@ public class Pig {
 
     public void jump(){
         if(position.y == 0){
-            velocity.y = 500;
+            velocity.y = 300;
         }
     }
 }

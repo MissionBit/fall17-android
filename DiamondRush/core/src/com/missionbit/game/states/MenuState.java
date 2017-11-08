@@ -17,7 +17,7 @@ public class MenuState extends State{
     public MenuState(GameStateManager gsm) {
         super(gsm);
 
-        menu = new Texture("menu.png");
+        menu = new Texture("farm.png");
         playBtn = new Texture ("playbtn.png");
         cam.setToOrtho (false, DiamondRush.WIDTH / 2,
                 DiamondRush.HEIGHT / 2);
@@ -40,7 +40,7 @@ public class MenuState extends State{
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(menu, 0, 0, DiamondRush.WIDTH, DiamondRush.HEIGHT);
-        sb.draw(playBtn, (DiamondRush.WIDTH / 2) - (playBtn.getWidth() / 2), DiamondRush.HEIGHT / 2);
+        sb.draw(playBtn, 500,300);
         sb.end();
     }
 
