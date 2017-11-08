@@ -11,13 +11,13 @@ import com.missionbit.game.DiamondRush;
 
 public class MenuState extends State{
 
-    private Texture background;
+    private Texture menu;
     private Texture playBtn;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
 
-        background = new Texture("bg.png");
+        menu = new Texture("menu.png");
         playBtn = new Texture ("playbtn.png");
         cam.setToOrtho (false, DiamondRush.WIDTH / 2,
                 DiamondRush.HEIGHT / 2);
@@ -39,14 +39,14 @@ public class MenuState extends State{
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, DiamondRush.WIDTH, DiamondRush.HEIGHT);
+        sb.draw(menu, 0, 0, DiamondRush.WIDTH, DiamondRush.HEIGHT);
         sb.draw(playBtn, (DiamondRush.WIDTH / 2) - (playBtn.getWidth() / 2), DiamondRush.HEIGHT / 2);
         sb.end();
     }
 
     @Override
     public void dispose() {
-        background.dispose();
+        menu.dispose();
         playBtn.dispose();
     }
 }
