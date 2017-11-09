@@ -39,7 +39,7 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(bg, cam.position.x - (cam.viewportWidth / 2), 0);
+        sb.draw(bg, cam.position.x - (cam.viewportWidth / 2), 0, HeroVillian.WIDTH, HeroVillian.HEIGHT);
         sb.draw(hero.getTexture(), hero.getPosition().x, hero.getPosition().y);
         sb.end();
     }
