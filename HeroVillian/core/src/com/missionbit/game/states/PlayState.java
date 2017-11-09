@@ -19,7 +19,7 @@ public class PlayState extends State {
         super(gsm);
         cam.setToOrtho(false, HeroVillian.WIDTH / 2, HeroVillian.HEIGHT / 2);
         hero = new Hero(50,100);
-        bg = new Texture("MenuState.png");
+        bg = new Texture("background.png");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(bg,(cam.position.x - cam.viewportWidth / 2), 0);
+        sb.draw(bg, cam.position.x - (cam.viewportWidth / 2), 0);
         sb.draw(hero.getTexture(), hero.getPosition().x, hero.getPosition().y);
         sb.end();
     }
