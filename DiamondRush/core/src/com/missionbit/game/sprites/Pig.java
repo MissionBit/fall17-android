@@ -12,6 +12,7 @@ public class Pig {
     private Vector3 velocity;
     private Texture pig;
     private static final int GRAVITY = -15;
+    private static final int GROUND = 63;
 
     public Pig(int x, int y){
         position = new Vector3(x, y, 0);
@@ -20,13 +21,13 @@ public class Pig {
     }
 
     public void update(float dt){
-        if(position.y > 0){
+        if(position.y > GROUND){
             velocity.add(0, GRAVITY, 0);
         }
         velocity.scl(dt);
         position.add(0, velocity.y, 0);
-        if(position.y < 0){
-            position.y = 0;
+        if(position.y < GROUND){
+            position.y = GROUND;
         }
         velocity.scl(1 / dt);
     }
@@ -40,8 +41,8 @@ public class Pig {
     }
 
     public void jump(){
-        if(position.y == 0){
-            velocity.y = 500;
+        if(position.y == GROUND){
+            velocity.y = 350;
         }
     }
 }
