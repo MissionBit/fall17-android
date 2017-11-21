@@ -7,27 +7,24 @@ import com.badlogic.gdx.math.Vector3;
  * Created by missionbit on 11/2/17.
  */
 
-public class Pig {
+public class Hero {
     private Vector3 position;
     private Vector3 velocity;
-    private Texture pig;
+    private Texture hero;
     private static final int GRAVITY = -15;
-    private static final int MOVEMENT = 100;
 
-    public Pig(int x, int y){
+    public Hero(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        pig = new Texture("pig.png");
+        hero = new Texture("bird.png");
     }
-
-    public void update(float dt){
-        if(position.y > GROUND){
+    public void update(float dt) {
+        if (position.y > 0) {
             velocity.add(0, GRAVITY, 0);
         }
         velocity.scl(dt);
-
-        position.add(MOVEMENT * dt , velocity.y, 0);
-        if(position.y < 0){
+        position.add(0, velocity.y, 0);
+        if(position.y < 0) {
             position.y = 0;
         }
         velocity.scl(1 / dt);
@@ -38,13 +35,12 @@ public class Pig {
     }
 
     public Texture getTexture() {
-        return pig;
+        return hero;
     }
 
     public void jump(){
-        if(position.y == GROUND){
-            velocity.y = 350;
+        if(position.y == 0){
+            velocity.y = 400;
         }
     }
 }
-
