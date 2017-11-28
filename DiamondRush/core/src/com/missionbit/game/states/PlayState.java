@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.missionbit.game.DiamondRush;
-import com.missionbit.game.sprites.Carrot;
-import com.missionbit.game.sprites.Pig;
+import com.missionbit.game.sprites.Log;
+import com.missionbit.game.sprites.Shalla;
 
 import java.util.Random;
 
@@ -18,20 +18,27 @@ public class PlayState extends State{
     private static final int BG_WIDTH = 1300;
     private static final int CARROT_WIDTH = 30;
     private static final int CARROT_SPACING = 20;
-    private Pig pig;
+    private static final int GROUND_Y_OFFSET = -10;
+    private Shalla pig;
     private Texture bg;
-    private Carrot carrot;
+    private Log carrot;
     private Vector2 bgPos1, bgPos2, bgPos3;
+    private Texture ground;
+    private Vector2 groundPos1, groundPos2;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, DiamondRush.WIDTH / 2, DiamondRush.HEIGHT / 2);
         bg = new Texture("CornField.png");
-        carrot = new Carrot(100);
-        pig = new Pig(50,50);
+        carrot = new Log(100, 40);
+        pig = new Shalla(50,100);
         bgPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2 - BG_WIDTH, 0);
         bgPos2 = new Vector2(bg.getWidth() + bgPos1.x, 0);
         bgPos3 = new Vector2(bg.getWidth() + bgPos2.x, 0);
+
+        ground = new Texture("CornFieldGround.png");
+        groundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, GROUND_Y_OFFSET);
+        groundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
     }
 
     @Override
@@ -44,11 +51,14 @@ public class PlayState extends State{
     @Override
     public void update(float dt) {
         handleInput();
+        updateBg();
         pig.update(dt);
         cam.position.x = pig.getPosition().x + 80;
-
+        updateGround();
         updateCarrots();
-        updateBg();
+        if(carrot.collides(pig.getBounds())) {
+            gsm.set(new PlayState(gsm));
+        }
         cam.update();
     }
 
@@ -73,6 +83,15 @@ public class PlayState extends State{
         }
     }
 
+    private void updateGround(){
+        if(cam.position.x - (cam.viewportWidth / 2) > groundPos1.x + ground.getWidth()){
+            groundPos1.add(ground.getWidth() * 2, 0);
+        }
+        if(cam.position.x - (cam.viewportWidth / 2) > groundPos1.x + ground.getWidth()){
+            groundPos2.add(ground.getWidth() * 2, 0);
+        }
+    }
+
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
@@ -82,11 +101,17 @@ public class PlayState extends State{
         sb.draw(bg, bgPos3.x, 0, BG_WIDTH, 300);
         sb.draw(pig.getTexture(), pig.getPosition().x, pig.getPosition().y);
         sb.draw(carrot.getCarrot(), carrot.getCarrotPos().x, carrot.getCarrotPos().y, 20,20);
+        sb.draw(ground, groundPos1.x, groundPos1.y);
+        sb.draw(ground, groundPos2.x, groundPos2.y);
         sb.end();
     }
 
     @Override
     public void dispose() {
         bg.dispose();
+        pig.dispose();
+        carrot.dispose();
+        ground.dispose();
     }
+
 }
