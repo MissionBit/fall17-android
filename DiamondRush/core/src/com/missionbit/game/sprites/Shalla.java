@@ -15,12 +15,12 @@ public class Shalla {
     private Vector3 position;
     private Vector3 velocity;
     private static final int GRAVITY = -15;
-    private static final int MOVEMENT = 200;
+    private static final int MOVEMENT = 300;
     private static final int GROUND = 55;
     private Rectangle bounds;
     private Animation shallaAnimation;
     private Texture texture;
-    private Sound flap;
+    private Sound jump;
 
     public Shalla(int x, int y){
         position = new Vector3(x, y, 0);
@@ -28,7 +28,7 @@ public class Shalla {
         texture = new Texture("Shalla4.png");
         shallaAnimation = new Animation(new TextureRegion(texture), 2, 0.5f);
         bounds = new Rectangle(position.x, position.y, 15, 30);
-        flap = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
+        jump = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
     }
 
     public void update(float dt){
@@ -57,7 +57,7 @@ public class Shalla {
     public void jump(){
         if(position.y == GROUND){
             velocity.y = 300;
-            flap.play(0.1f);
+            jump.play(0.1f);
         }
     }
 
@@ -67,7 +67,7 @@ public class Shalla {
 
     public void dispose(){
        texture.dispose();
-        flap.dispose();
+        jump.dispose();
     }
 }
 
