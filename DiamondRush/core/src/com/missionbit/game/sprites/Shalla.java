@@ -11,17 +11,17 @@ import com.badlogic.gdx.math.Vector3;
 public class Shalla {
     private Vector3 position;
     private Vector3 velocity;
-    private Texture pig;
+    private Texture shalla;
     private static final int GRAVITY = -15;
-    private static final int MOVEMENT = 100;
+    private static final int MOVEMENT = 200;
     private static final int GROUND = 35;
     private Rectangle bounds;
 
     public Shalla(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        pig = new Texture("pig.png");
-        bounds = new Rectangle(position.x, position.y, pig.getWidth(), pig.getHeight());
+        shalla = new Texture("Shalla4.png");
+        bounds = new Rectangle(position.x, position.y, shalla.getWidth(), shalla.getHeight());
     }
 
     public void update(float dt){
@@ -43,12 +43,12 @@ public class Shalla {
     }
 
     public Texture getTexture() {
-        return pig;
+        return shalla;
     }
 
     public void jump(){
         if(position.y == GROUND){
-            velocity.y = 550;
+            velocity.y = 800;
         }
     }
 
@@ -57,7 +57,7 @@ public class Shalla {
     }
 
     public void dispose(){
-        pig.dispose();
+        shalla.dispose();
     }
 }
 

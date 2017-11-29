@@ -21,7 +21,7 @@ public class Log {
 
     public Log(float x, float y){
         rand = new Random();
-        carrot = new Texture("carrot.png");
+        carrot = new Texture("log.png");
         carrotPos = new Vector2(rand.nextInt(FLUCTUATION) + CARROT_MIN_X, y);
         bounds = new Rectangle(carrotPos.x, carrotPos.y, carrot.getWidth(), carrot.getHeight());
     }
