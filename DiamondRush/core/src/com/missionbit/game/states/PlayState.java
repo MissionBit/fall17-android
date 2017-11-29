@@ -19,9 +19,9 @@ public class PlayState extends State{
     private static final int CARROT_WIDTH = 30;
     private static final int CARROT_SPACING = 20;
     private static final int GROUND_Y_OFFSET = -10;
-    private Shalla pig;
+    private Shalla shalla;
     private Texture bg;
-    private Log carrot;
+    private Log log;
     private Vector2 bgPos1, bgPos2, bgPos3;
     private Texture ground;
     private Vector2 groundPos1, groundPos2;
@@ -29,9 +29,9 @@ public class PlayState extends State{
     public PlayState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, DiamondRush.WIDTH / 2, DiamondRush.HEIGHT / 2);
-        bg = new Texture("CornField.png");
-        carrot = new Log(100, 40);
-        pig = new Shalla(50,100);
+        bg = new Texture("background.png");
+        log = new Log(100, 40);
+        shalla = new Shalla(50,100);
         bgPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2 - BG_WIDTH, 0);
         bgPos2 = new Vector2(bg.getWidth() + bgPos1.x, 0);
         bgPos3 = new Vector2(bg.getWidth() + bgPos2.x, 0);
@@ -44,7 +44,7 @@ public class PlayState extends State{
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()){
-            pig.jump();
+            shalla.jump();
         }
     }
 
@@ -52,22 +52,22 @@ public class PlayState extends State{
     public void update(float dt) {
         handleInput();
         updateBg();
-        pig.update(dt);
-        cam.position.x = pig.getPosition().x + 80;
+        shalla.update(dt);
+        cam.position.x = shalla.getPosition().x + 80;
         updateGround();
         updateCarrots();
-        if(carrot.collides(pig.getBounds())) {
+        if(log.collides(shalla.getBounds())) {
             gsm.set(new PlayState(gsm));
         }
         cam.update();
     }
 
     public void updateCarrots() {
-        if (carrot.getCarrotPos().x + CARROT_WIDTH <= cam.position.x - cam.viewportWidth / 2) {
+        if (log.getCarrotPos().x + CARROT_WIDTH <= cam.position.x - cam.viewportWidth / 2) {
             Random rand = new Random();
             float fluctuation = rand.nextFloat();
-            float distance = (fluctuation * CARROT_SPACING) + DiamondRush.WIDTH;
-            carrot.reposition(carrot.getCarrotPos().x + distance);
+            float distance = ( fluctuation * CARROT_SPACING) + DiamondRush.WIDTH;
+            log.reposition(log.getCarrotPos().x + distance);
         }
     }
 
@@ -99,8 +99,8 @@ public class PlayState extends State{
         sb.draw(bg, bgPos1.x, 0, BG_WIDTH, 300);
         sb.draw(bg, bgPos2.x, 0, BG_WIDTH, 300);
         sb.draw(bg, bgPos3.x, 0, BG_WIDTH, 300);
-        sb.draw(pig.getTexture(), pig.getPosition().x, pig.getPosition().y);
-        sb.draw(carrot.getCarrot(), carrot.getCarrotPos().x, carrot.getCarrotPos().y, 20,20);
+        sb.draw(shalla.getTexture(), shalla.getPosition().x, shalla.getPosition().y);
+        sb.draw(log.getCarrot(), log.getCarrotPos().x, log.getCarrotPos().y, 60,60);
         sb.draw(ground, groundPos1.x, groundPos1.y);
         sb.draw(ground, groundPos2.x, groundPos2.y);
         sb.end();
@@ -109,8 +109,8 @@ public class PlayState extends State{
     @Override
     public void dispose() {
         bg.dispose();
-        pig.dispose();
-        carrot.dispose();
+        shalla.dispose();
+        log.dispose();
         ground.dispose();
     }
 
