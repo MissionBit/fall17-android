@@ -11,33 +11,33 @@ import java.util.Random;
  */
 
 public class Log {
-    private Texture carrot;
+    private Texture log;
     private static final int FLUCTUATION = 500;
-    private static final int CARROT_MIN_X = 200;
-    private Vector2 carrotPos;
+    private static final int LOG_MIN_X = 200;
+    private Vector2 logPos;
     private Random rand;
     private Rectangle bounds;
 
 
     public Log(float x, float y){
         rand = new Random();
-        carrot = new Texture("log.png");
-        carrotPos = new Vector2(rand.nextInt(FLUCTUATION) + CARROT_MIN_X, y);
-        bounds = new Rectangle(carrotPos.x, carrotPos.y, carrot.getWidth(), carrot.getHeight());
+        log = new Texture("log.png");
+        logPos = new Vector2(rand.nextInt(FLUCTUATION) + LOG_MIN_X, y);
+        bounds = new Rectangle(logPos.x, logPos.y, 30, 30);
     }
 
 
-    public Texture getCarrot() {
-        return carrot;
+    public Texture getLog() {
+        return log;
     }
 
-    public Vector2 getCarrotPos() {
-        return carrotPos;
+    public Vector2 getLogPos() {
+        return logPos;
     }
 
     public void reposition(float x){
-        carrotPos.set(x, 35);
-        bounds.setPosition(carrotPos.x, carrotPos.y);
+        logPos.set(x, 55);
+        bounds.setPosition(logPos.x, logPos.y);
     }
 
     public boolean collides(Rectangle player){
@@ -45,6 +45,6 @@ public class Log {
     }
 
     public void dispose(){
-        carrot.dispose();
+        log.dispose();
     }
 }
