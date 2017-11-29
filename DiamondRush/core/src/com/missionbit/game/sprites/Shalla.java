@@ -1,6 +1,9 @@
 package com.missionbit.game.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
@@ -11,20 +14,25 @@ import com.badlogic.gdx.math.Vector3;
 public class Shalla {
     private Vector3 position;
     private Vector3 velocity;
-    private Texture shalla;
     private static final int GRAVITY = -15;
     private static final int MOVEMENT = 200;
-    private static final int GROUND = 35;
+    private static final int GROUND = 55;
     private Rectangle bounds;
+    private Animation shallaAnimation;
+    private Texture texture;
+    private Sound flap;
 
     public Shalla(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0, 0, 0);
-        shalla = new Texture("Shalla4.png");
-        bounds = new Rectangle(position.x, position.y, shalla.getWidth(), shalla.getHeight());
+        texture = new Texture("Shalla4.png");
+        shallaAnimation = new Animation(new TextureRegion(texture), 2, 0.5f);
+        bounds = new Rectangle(position.x, position.y, 15, 30);
+        flap = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
     }
 
     public void update(float dt){
+        shallaAnimation.update(dt);
         if(position.y > GROUND){
             velocity.add(0, GRAVITY, 0);
         }
@@ -42,13 +50,14 @@ public class Shalla {
         return position;
     }
 
-    public Texture getTexture() {
-        return shalla;
+    public TextureRegion getTexture() {
+        return shallaAnimation.getFrame();
     }
 
     public void jump(){
         if(position.y == GROUND){
-            velocity.y = 800;
+            velocity.y = 300;
+            flap.play(0.1f);
         }
     }
 
@@ -57,7 +66,8 @@ public class Shalla {
     }
 
     public void dispose(){
-        shalla.dispose();
+       texture.dispose();
+        flap.dispose();
     }
 }
 
