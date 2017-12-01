@@ -57,7 +57,7 @@ public class Shalla {
     public void jump(){
         if(position.y == GROUND){
             velocity.y = 300;
-            jump.play(0.1f);
+            jump.play(0.5f);
         }
     }
 

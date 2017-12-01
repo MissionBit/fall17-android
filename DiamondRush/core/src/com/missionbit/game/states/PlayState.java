@@ -36,7 +36,7 @@ public class PlayState extends State{
         bgPos3 = new Vector2(bg.getWidth() + bgPos2.x, 0);
         music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
         music.setLooping(true);
-        music.setVolume(0.1f);
+        music.setVolume(0.5f);
         music.play();
     }
 
