@@ -16,7 +16,7 @@ public class MenuState extends State{
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        menu = new Texture("farm.png");
+        menu = new Texture("menuBg.png");
         playBtn = new Texture ("playbtn.png");
         cam.setToOrtho(false, DiamondRush.WIDTH / 2,
                 DiamondRush.HEIGHT / 2);

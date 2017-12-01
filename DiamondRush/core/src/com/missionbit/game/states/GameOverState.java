@@ -17,12 +17,12 @@ public class GameOverState extends State{
 
     public GameOverState(GameStateManager gsm) {
         super(gsm);
-        bg = new Texture("gameOver.jpg");
+        bg = new Texture("gameOver.png");
         cam.setToOrtho (false, DiamondRush.WIDTH,
                 DiamondRush.HEIGHT);
         music = Gdx.audio.newMusic(Gdx.files.internal("gameover.mp3"));
         music.setLooping(true);
-        music.setVolume(0.5f);
+        music.setVolume(0.7f);
         music.play();
     }
 
