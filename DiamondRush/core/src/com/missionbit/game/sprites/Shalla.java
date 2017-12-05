@@ -15,7 +15,7 @@ public class Shalla {
     private Vector3 position;
     private Vector3 velocity;
     private static final int GRAVITY = -15;
-    private static final int MOVEMENT = 400;
+    private static final int MOVEMENT = 45g0;
     private static final int GROUND = 55;
     private Rectangle bounds;
     private Animation shallaAnimation;
